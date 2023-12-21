@@ -33,7 +33,7 @@ static const uint8_t powerBuf[] = {
     20,19,18,17,16,14,12,10,8,6,3,3,3
 };
 
-void IRAM_ATTR isr_ext();
-void IRAM_ATTR onTimerISR();
+void isr_ext();
+void onTimerISR();
 
 #endif
