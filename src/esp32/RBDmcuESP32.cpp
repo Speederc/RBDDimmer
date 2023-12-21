@@ -2,7 +2,6 @@
 
 #include "RBDmcuESP32.h"
 
-
 int pulseWidth = 1;
 //int pulseWidth = 10;
 volatile int current_dim = 0;
@@ -51,15 +50,18 @@ void dimmerLamp::timer_init(void)
 	hw_timer_t * timer = NULL;
 	// Use 1st timer of 4 (counted from zero).
   	// Set 80 divider for prescaler (see ESP32 Technical Reference Manual for more info).
-	timer = timerBegin(0, 250, true);
+	//timer = timerBegin(0, 250, true); //OLD
+	timer = timerBegin(320000);
 	// Attach onTimer function to our timer.
-	timerAttachInterrupt(timer, &onTimerISR, true);
+	//timerAttachInterrupt(timer, &onTimerISR, true); //old
+	timerAttachInterrupt(timer, &onTimerISR);
 	// Set alarm to call onTimer function every second (value in microseconds).
   	// Repeat the alarm (third parameter)
   	//timerAlarmWrite(timer, 30, true);
-	timerAlarmWrite(timer, 32, true);
+	//timerAlarmWrite(timer, 32, true); //old
+	timerAlarm(timer, 32, true, 0);
   	// Start an alarm
-  	timerAlarmEnable(timer);
+  	//timerAlarmEnable(timer); //old
 }
 
 void dimmerLamp::ext_int_init(void) 
